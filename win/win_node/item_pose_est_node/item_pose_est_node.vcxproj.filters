@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\src">
+      <UniqueIdentifier>{5b29e195-9ff5-404b-98ea-47051044b38e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\pcl_funcs">
+      <UniqueIdentifier>{7ef9e5bc-4c94-48da-9af6-35ebf5c4f8a4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\load_item_list.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pcl_funcs\pose_est_funcs.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pcl_funcs\filter_funcs.h">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pcl_funcs\plane_funcs.h">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pcl_funcs\regisitration_funcs.h">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\pcl_funcs\file_funcs.h">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="item_pose_est_node.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\load_item_list.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cv_bridge.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pcl_funcs\pose_est_funcs.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pcl_funcs\filter_funcs.cpp">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pcl_funcs\plane_funcs.cpp">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pcl_funcs\registration_funcs.cpp">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pcl_funcs\file_funcs.cpp">
+      <Filter>ソース ファイル\src\pcl_funcs</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

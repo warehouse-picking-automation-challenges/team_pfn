@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--
+# Copyright 2016 Preferred Networks, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+-->
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="pure-min.css">
+<link href="vis.min.css" rel="stylesheet" type="text/css" />
+<script src="vis.min.js"></script>
+<script type="text/javascript" src="eventemitter2.min.js"></script>
+<script type="text/javascript" src="roslib.min.js"></script>
+<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+<style type="text/css">
+div#log {
+    overflow-y:scroll;
+    height:500px;
+    font-size: 75%;
+    padding:1em;
+}
+.item {
+    color: #663300;
+}
+.strat {
+    color: #000066;
+}
+.success {
+    color: green;
+}
+.fail {
+    color: red;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+  <!--<h1>Monitoring Dashboard</h1>-->
+  <div id="visualization"></div>
+</div>
+
+<div class="pure-g">
+    <div class="pure-u-1-2">
+      <div>
+        <h2><span id="desc">Grab item from bin</span> <small id="filename">(foobar.json)</small></h2>
+        <p>Target Location <span id="target_loc">...</span></p>
+        <h3>Pick History</h3>
+        <ul id="binhist"></ul>
+      </div>
+      <div>
+        <h2>History</h2>
+        <ul id="history">
+        </ul>
+      </div>
+    </div>
+    <div class="pure-u-1-2"><div id="log"></div></div>
+</div>
+
+<script type="text/javascript">
+  // DOM element where the Timeline will be attached
+  var container = document.getElementById('visualization');
+
+  // Create a DataSet (allows two way data-binding)
+  var items = new vis.DataSet([]);
+
+  // Configuration for the Timeline
+  var startTime = new Date();
+  var currentEnd = new Date(Date.now() + 1000);
+  var options = {
+    start: startTime,
+    end: currentEnd,
+    height: '300px',
+  };
+
+  var groups = [
+    {id: "main_item", content: "Main Item"},
+    {id: "item", content: "Current Item"},
+    {id: "phase", content: "Phase"}
+  ];
+
+  // Create a Timeline
+  var timeline = new vis.Timeline(container, items, groups, options);
+
+  setInterval(function() {
+    // update all active items to grow on the right side
+    for (var i=0; i<items.length; i++) {
+      var item = items.get(i);
+      if (item.className == "active" && item.end < timeline.getCurrentTime()) {
+        items.remove(item.id);
+        item.end = new Date(timeline.getCurrentTime().getTime() + 3000);
+        items.add(item);
+      }
+    }
+  }, 1000);
+
+  function mark_main_inactive(d) {
+    // mark all ("the") current main item as inactive
+    for (var i=0; i<items.length; i++) {
+      var item = items.get(i);
+      if (item.className == "active" && item.group == "main_item") {
+        items.remove(item.id);
+        item.end = d;
+        item.className = "";
+        items.add(item);
+      }
+    }
+  }
+
+  function mark_secondary_inactive(d) {
+    // mark all ("the") current secondary item as inactive
+    for (var i=0; i<items.length; i++) {
+      var item = items.get(i);
+      if (item.className == "active" && item.group == "item") {
+        items.remove(item.id);
+        item.end = d;
+        item.className = "";
+        items.add(item);
+      }
+    }
+  }
+
+  function mark_phase_inactive(d) {
+    // mark all ("the") current phase as inactive
+    for (var i=0; i<items.length; i++) {
+      var item = items.get(i);
+      if (item.className == "active" && item.group == "phase") {
+        items.remove(item.id);
+        item.end = d;
+        item.className = "";
+        items.add(item);
+      }
+    }
+  }
+</script>
+
+<script type="text/javascript" type="text/javascript">
+  // Connecting to ROS
+  // -----------------
+
+  var ros = new ROSLIB.Ros({
+    url : 'ws://192.168.0.1:9090'
+  });
+
+  ros.on('connection', function() {
+    console.log('Connected to websocket server.');
+  });
+
+  ros.on('error', function(error) {
+    console.log('Error connecting to websocket server: ', error);
+  });
+
+  ros.on('close', function() {
+    console.log('Connection to websocket server closed.');
+  });
+
+  // Subscribing to a Topic
+  // ----------------------
+
+  function li(txt) {
+    var l = $("<li></li>");
+    l.html(txt);
+    return l;
+  }
+
+  function item(txt) {
+    return "<span class='item'>" + txt + "</span>";
+  }
+
+  function strategy(txt) {
+    return "<span class='strat'>" + txt + "</span>";
+  }
+
+  function success(txt) {
+    return "<span class='success'>" + txt + "</span>";
+  }
+
+  function fail(txt) {
+    return "<span class='fail'>" + txt + "</span>";
+  }
+
+  var pick_item = 0;
+
+  var actions = [
+    [
+      new RegExp("calibrating shelf position"),
+      function(matches, time) {
+        // start a new item
+        mark_main_inactive(time);
+        items.add({id: pick_item, content: "calibration", start: time,
+          end: time, className: "active", group: "main_item"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("attempt to pick item (.+) from (.+)"),
+      function(matches, time) {
+        $("#desc").html("Pick " + item(matches[1]) + " from " + matches[2]);
+        var h = $("#binhist").clone();
+        $("#binhist").text("");
+        h.removeAttr("id");
+        $("#history > li:first-child").append(h);
+        $("#history").prepend(li(matches[0]));
+        // start a new item
+        mark_main_inactive(time);
+        items.add({id: pick_item, content: matches[1] + " from " + matches[2],
+          start: time, end: time, className: "active", group: "main_item"});
+        pick_item++;
+        mark_secondary_inactive(time);
+        items.add({id: pick_item, content: matches[1], start: time,
+          end: time, className: "active", group: "item"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("attempt to take item (.+) from tote"),
+      function(matches, time) {
+        $("#desc").html("Stow " + item(matches[1]) + " from tote");
+        var h = $("#binhist").clone();
+        $("#binhist").text("");
+        h.removeAttr("id");
+        $("#history > li:first-child").append(h);
+        $("#history").prepend(li(matches[0]));
+        // start a new item
+        mark_main_inactive(time);
+        items.add({id: pick_item, content: matches[1] + " from " + matches[2],
+          start: time, end: time, className: "active", group: "main_item"});
+        pick_item++;
+        mark_secondary_inactive(time);
+        items.add({id: pick_item, content: matches[1], start: time,
+          end: time, className: "active", group: "item"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("starting (.+) task from (.+)"),
+      function(matches, time) {
+        $("#filename").text("(" + item(matches[2]) + ")");
+      }
+    ],
+    [
+      new RegExp("target position for (.+) in the tote: (.+)"),
+      function(matches, time) {
+        $("#target_loc").text("(tote): " + matches[2]);
+      }
+    ],
+    [
+      new RegExp("move to photo"),
+      function(matches, time) {
+        // start a new item
+        mark_phase_inactive(time);
+        items.add({id: pick_item, content: "photo", start: time,
+          end: time, className: "active", group: "phase"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("strategy .*<grab.[a-z]+.(.+) object .+ cannot grab item (.+)"),
+      function(matches, time) {
+        $("#binhist").append(li(strategy(matches[1]) + " " + fail("cannot") + " grab " + item(matches[2])));
+        mark_phase_inactive(time);
+      }
+    ],
+    [
+      new RegExp("can_grab_item was True, try strategy .*<grab.[a-z]+.(.+) object .+ for item (.+)"),
+      function(matches, time) {
+        $("#binhist").append(li(strategy(matches[1]) + " claims to be " + success("able to grab ") + item(matches[2])));
+        $("#binhist").append(li("try to grab " + item(matches[2]) + " using " + strategy(matches[1])));
+        // start a new item
+        mark_phase_inactive(time);
+        items.add({id: pick_item, content: "grab", start: time,
+          end: time, className: "active", group: "phase"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("succeeded to take item (.+)"),
+      function(matches, time) {
+        $("#binhist").append(li(success("grabbed ") + item(matches[1])));
+        mark_phase_inactive(time);
+      }
+    ],
+    [
+      new RegExp("failed to take item (.+) using"),
+      function(matches, time) {
+        $("#binhist").append(li(fail("failed") + " to grab " + item(matches[1])));
+        mark_phase_inactive(time);
+      }
+    ],
+    [
+      new RegExp("we failed to stow item (.+) in shelf"),
+      function(matches, time) {
+        $("#binhist").append(li(fail("failed") + " to stow " + item(matches[1]) + " in shelf"));
+      }
+    ],
+    [
+      new RegExp("succeeded to stow item (.+) in shelf"),
+      function(matches, time) {
+        $("#binhist").append(li(success("stowed") + " item " + item(matches[1]) + " in shelf"));
+        mark_secondary_inactive(time);
+      }
+    ],
+    [
+      new RegExp("put item (.+) into tote"),
+      function(matches, time) {
+        $("#binhist").append(li(success("stowed") + " item " + item(matches[1]) + " in tote"));
+        mark_main_inactive(time);
+      }
+    ],
+    [
+      new RegExp("we try to move (.+) out of the way"),
+      function(matches, time) {
+        $("#binhist").append(li("try to move obstacle " + item(matches[1]) + " to a different bin"));
+        // add item to timeline
+        mark_secondary_inactive(time);
+        items.add({id: pick_item, content: matches[1], start: time,
+          end: time, className: "active", group: "item"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("if we succeed to take (.+), we will put it to (.+)/(.+)"),
+      function(matches, time) {
+        $("#binhist").append(li("target bin for " + item(matches[1]) + " is " + matches[2]));
+      }
+    ],
+    [
+      new RegExp("trying to stow (.+) in (.+)"),
+      function(matches, time) {
+        $("#binhist").append(li("try to put item " + item(matches[1]) + " to " + matches[2]));
+        // start a new item
+        mark_phase_inactive(time);
+        items.add({id: pick_item, content: "stow2bin", start: time,
+          end: time, className: "active", group: "phase"});
+        pick_item++;
+      }
+    ],
+    [
+      new RegExp("couldn't find item (.+) in a crowded bin"),
+      function(matches, time) {
+        $("#binhist").append(li(fail("postpone") + " taking " + item(matches[1]) + " because it's too crowded in the bin"));
+      }
+    ],
+  ];
+
+  function msg_handler(message) {
+    if (message.msg.indexOf("Inbound TCP/IP connection") >= 0) {
+      return;
+    }
+    // compute date
+    var tstamp = message.header.stamp.secs * 1000 + message.header.stamp.nsecs / 1e6;
+    var d = new Date(tstamp);
+    timeline.setCurrentTime(d);
+
+    // rescale timeline
+    if (d < startTime.getTime()) {
+      startTime = new Date(d.getTime() - 1000);
+      timeline.setOptions({start: startTime});
+    }
+    if (currentEnd.getTime() + 5000 < d) {
+      currentEnd = new Date(d.getTime() + 20000);
+      timeline.setOptions({end: currentEnd});
+    }
+
+    // append to log
+    var output = "<div><b>" + message.name + "</b>: " + message.msg + "</div>";
+    $("#log").append(output);
+    /*$("#log").animate({
+        scrollTop: $("#log")[0].scrollHeight
+    }, 300);*/
+    // change HTML according to message
+    actions.forEach(function(regex_action) {
+      res = message.msg.match(regex_action[0]);
+      if (res != null) {
+        regex_action[1](res, d);
+      }
+    });
+  }
+
+  var listener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/rosout',
+    messageType : 'rosgraph_msgs/Log'
+  });
+
+  listener.subscribe(msg_handler);
+</script>
+
+</body>
+</html>

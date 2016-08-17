@@ -1,0 +1,8 @@
+- VisualStudio 2015
+- PCL 1.7.2 + 3rdParty  (for using with C++/CLR, comment out of "struct FPSCallback" in pcl_visualizer.h is needed)
+- boost 1.5.7
+- RealSense SDK version:8.0.24.6528 2016R1
+- fx8clientlib.dll fx8userlib.dll (C++/CLR) (These are not included but you can get if you buy fx8 from nippon signal.)
+- OpenCV 3.1.0
+
+- decompress files in lib directory which are win_roscpp files compiled already.

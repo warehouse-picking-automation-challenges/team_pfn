@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\libros">
+      <UniqueIdentifier>{aa72e5a4-bc41-445e-bb0a-1c2121be1c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\libros\transport">
+      <UniqueIdentifier>{4b854edb-9b19-4896-b3bc-2a8094db0a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\xmlrpc">
+      <UniqueIdentifier>{8a38df81-5bf3-4135-9664-398bb553af48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libros\callback_queue.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\common.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\connection.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\connection_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\file_log.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\init.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\internal_timer_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\intraprocess_publisher_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\intraprocess_subscriber_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\io.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\master.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\message_deserializer.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\names.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\network.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\node_handle.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\param.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\poll_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\poll_set.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\publication.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\publisher.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\publisher_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\rosout_appender.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_client.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_client_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_publication.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_server.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\service_server_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\single_subscriber_publisher.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\spinner.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\statistics.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\subscriber.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\subscriber_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\subscription.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\subscription_queue.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\this_node.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\timer.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\topic.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\topic_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\transport_publisher_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\transport_subscriber_link.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\wall_timer.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\xmlrpc_manager.cpp">
+      <Filter>ソース ファイル\libros</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\transport\transport.cpp">
+      <Filter>ソース ファイル\libros\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\transport\transport_tcp.cpp">
+      <Filter>ソース ファイル\libros\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="libros\transport\transport_udp.cpp">
+      <Filter>ソース ファイル\libros\transport</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcClient.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcDispatch.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcServer.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcServerConnection.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcServerMethod.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcSocket.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcSource.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcUtil.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="xmlrpc\XmlRpcValue.cpp">
+      <Filter>ソース ファイル\xmlrpc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

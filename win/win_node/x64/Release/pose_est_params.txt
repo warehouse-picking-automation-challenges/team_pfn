@@ -1,0 +1,9 @@
+leaf:0.005
+norm_radius:0.01
+feature_radius:0.025
+MaximumIterations:300000
+NumberOfSamples:3
+SimilarityThreshold:0.6
+CorrespondenceRandomness:2
+MaxCorrespondenceDistance:0.01
+InlierFraction:0.15

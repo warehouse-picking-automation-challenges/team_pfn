@@ -1,0 +1,19 @@
+*install rosserial_arduino
+
+sudo apt-get install ros-indigo-rosserial-arduino
+sudo apt-get install ros-indigo-rosserial
+
+*make libraries into Arduino sketchbook directory
+
+cd <sketchbook>/libraries
+rosrun rosserial_arduino make_libraries.py .
+
+*start running Arduino as a node
+python run_arduino.py firstarduino(node name) /dev/ttyACM0(port name)
+
+*If permission denied,
+chmod 666 /dev/ttyACM0
+
+*If you cannot find a port
+edit preferences.txt file (in Unix, it's in ~/.arduino/preferences.txt).
+Look for Serial.debug_rate and change it to 9600

@@ -1,0 +1,45 @@
+<!--
+Copyright 2016 Preferred Networks, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<launch>
+  <!-- vacuum control and sensors -->
+  <node name="arduino0" pkg="apc2016" type="arduino.sh" args="0" output="screen" respawn="true" respawn_delay="10" />
+  <node name="arduino1" pkg="apc2016" type="arduino.sh" args="1" output="screen" respawn="true" respawn_delay="10" />
+  <node name="arduino2" pkg="apc2016" type="arduino.sh" args="2" output="screen" respawn="true" respawn_delay="10" />
+  <node name="arduino3" pkg="apc2016" type="arduino.sh" args="3" output="screen" respawn="true" respawn_delay="10" />
+  <!-- <node name="arduino4" pkg="apc2016" type="arduino.sh" args="4" output="screen" respawn="true" respawn_delay="10" /> -->
+  <node name="vacuum_check" pkg="apc2016" type="vacuum_check.py" output="screen" respawn="true" respawn_delay="10" />
+  <node name="vacuum_control" pkg="apc2016" type="vacuum_control.py" output="screen" respawn="true" respawn_delay="10" />
+  <node name="touch_check" pkg="apc2016" type="touch_check.py" output="screen" respawn="true" respawn_delay="10" />
+  <node name="pipe_control" pkg="apc2016" type="pipe_control.py" output="screen" respawn="true" respawn_delay="10" />
+  <node name="dist_check" pkg="apc2016" type="distance_check.py" output="screen" respawn="true" respawn_delay="2" />
+  <node name="calibration" pkg="apc2016" type="calibration.py" output="screen" respawn="true" respawn_delay="2" />
+  <!-- image processing -->
+  <node name="snapshot_left" pkg="apc2016" type="snapshot.py" args="left" respawn="true" respawn_delay="2" />
+  <node name="snapshot_right" pkg="apc2016" type="snapshot.py" args="right" respawn="true" respawn_delay="2" />
+  <node name="segmentation_left" pkg="apc2016" type="segmentation_svc.py" args="-w left -g 0" respawn="true" respawn_delay="10" output="screen" />
+  <node name="segmentation_right" pkg="apc2016" type="segmentation_svc.py" args="-w right -g 0" respawn="true" respawn_delay="10" output="screen" />
+  <!-- arm control -->
+  <node name="arm_control_left" pkg="apc2016" type="arm_control_left.py" output="screen" respawn="true" respawn_delay="2" />
+  <node name="arm_control_right" pkg="apc2016" type="arm_control_right.py" output="screen" respawn="true" respawn_delay="2" />
+  <node name="arm_control" pkg="apc2016" type="arm_control.py" output="screen" respawn="true" respawn_delay="2" />
+  <node name="coord_transformer" pkg="apc2016" type="coord_transformer.py" output="screen" respawn="true" respawn_delay="2" />
+  <!-- servo control -->
+  <node name="servo_server" pkg="apc2016" type="servo_control.sh" output="screen" respawn="true" respawn_delay="10" />
+  <!-- for rviz display of point clouds -->
+  <node name="rviz_coords" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 map world 10" />
+  <!-- supervisor -->
+  <node name="supervisor" pkg="apc2016" type="supervisor.py" output="screen" respawn="true" respawn_delay="2" />
+</launch>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{744C4DB8-E632-4C3D-A4B9-6D46FDF68EAB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>roscpp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions);WIN32;_WIN32;_WINDOWS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\;$(SolutionDir)include\xmlrpc\;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions);WIN32;_WIN32;_WINDOWS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\;$(SolutionDir)include\xmlrpc\;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libros\callback_queue.cpp" />
+    <ClCompile Include="libros\common.cpp" />
+    <ClCompile Include="libros\connection.cpp" />
+    <ClCompile Include="libros\connection_manager.cpp" />
+    <ClCompile Include="libros\file_log.cpp" />
+    <ClCompile Include="libros\init.cpp" />
+    <ClCompile Include="libros\internal_timer_manager.cpp" />
+    <ClCompile Include="libros\intraprocess_publisher_link.cpp" />
+    <ClCompile Include="libros\intraprocess_subscriber_link.cpp" />
+    <ClCompile Include="libros\io.cpp" />
+    <ClCompile Include="libros\master.cpp" />
+    <ClCompile Include="libros\message_deserializer.cpp" />
+    <ClCompile Include="libros\names.cpp" />
+    <ClCompile Include="libros\network.cpp" />
+    <ClCompile Include="libros\node_handle.cpp" />
+    <ClCompile Include="libros\param.cpp" />
+    <ClCompile Include="libros\poll_manager.cpp" />
+    <ClCompile Include="libros\poll_set.cpp" />
+    <ClCompile Include="libros\publication.cpp" />
+    <ClCompile Include="libros\publisher.cpp" />
+    <ClCompile Include="libros\publisher_link.cpp" />
+    <ClCompile Include="libros\rosout_appender.cpp" />
+    <ClCompile Include="libros\service.cpp" />
+    <ClCompile Include="libros\service_client.cpp" />
+    <ClCompile Include="libros\service_client_link.cpp" />
+    <ClCompile Include="libros\service_manager.cpp" />
+    <ClCompile Include="libros\service_publication.cpp" />
+    <ClCompile Include="libros\service_server.cpp" />
+    <ClCompile Include="libros\service_server_link.cpp" />
+    <ClCompile Include="libros\single_subscriber_publisher.cpp" />
+    <ClCompile Include="libros\spinner.cpp" />
+    <ClCompile Include="libros\statistics.cpp" />
+    <ClCompile Include="libros\subscriber.cpp" />
+    <ClCompile Include="libros\subscriber_link.cpp" />
+    <ClCompile Include="libros\subscription.cpp" />
+    <ClCompile Include="libros\subscription_queue.cpp" />
+    <ClCompile Include="libros\this_node.cpp" />
+    <ClCompile Include="libros\timer.cpp" />
+    <ClCompile Include="libros\topic.cpp" />
+    <ClCompile Include="libros\topic_manager.cpp" />
+    <ClCompile Include="libros\transport\transport.cpp" />
+    <ClCompile Include="libros\transport\transport_tcp.cpp" />
+    <ClCompile Include="libros\transport\transport_udp.cpp" />
+    <ClCompile Include="libros\transport_publisher_link.cpp" />
+    <ClCompile Include="libros\transport_subscriber_link.cpp" />
+    <ClCompile Include="libros\wall_timer.cpp" />
+    <ClCompile Include="libros\xmlrpc_manager.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcClient.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcDispatch.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcServer.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcServerConnection.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcServerMethod.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcSocket.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcSource.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcUtil.cpp" />
+    <ClCompile Include="xmlrpc\XmlRpcValue.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

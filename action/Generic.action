@@ -1,0 +1,61 @@
+# Copyright 2016 Preferred Networks, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# Define the goal
+# target:
+# - for linear servo:
+#   - "0" or "1" (position index)
+#     OR "-1" (turn servo off)
+#     OR "-2" (turn servo on and return HOME)
+# - for rotary servos:
+#   space-concatenation of
+#   - decimal number (angle for first servo)
+#   - decimal number (angle of second servo)
+#   e.g. "20.3 90.8"
+string target
+---
+# Define the result
+# result:
+# - for linear servo:
+#   space-concatenation of
+#   - "0" or "1" (position index) OR "-1" or "-2" (for servo commands)
+#   - decimal number (position in mm)
+#   e.g. "1 20.03"
+# - for rotary servos:
+#   space-concatenation of
+#   - decimal number (angle in deg for first servo)
+#   - decimal number (angle in deg for second servo)
+#   e.g. "20.3 90.8"
+# error:
+#   contains an error message if a problem
+#   occured during move. if there is such
+#   a message, the values in the "result"
+#   string (if present) have no meaning
+string  result
+string  error
+---
+# Define a feedback message
+# status:
+# - for linear servo:
+#   space-concatenation of
+#   - "0" or "1" (boolean flag for "is moving")
+#   - decimal number (position in mm)
+#   e.g. "1 12.03"
+# - for rotary servos:
+#   space-concatenation of
+#   - "0" or "1" (boolean flag for "first servo is moving")
+#   - "0" or "1" (boolean flag for "second servo is moving")
+#   - decimal number (angle in deg for first servo)
+#   - decimal number (angle in deg for second servo)
+#   e.g. "0 1 12.3 90.8"
+string  status

@@ -1,0 +1,1 @@
+realsense_node.exe http://192.168.0.1:11311 left #1 1
